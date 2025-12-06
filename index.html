@@ -386,12 +386,41 @@
 </main>
 
 <footer>
-  <div>© <span id="year"></span> ひぐちの趣味部屋</div>
+  <div>© <span id="year"></span> 麻婆豆腐の趣味部屋</div>
 </footer>
 
 <script>
   // 年号を自動更新
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  // ===== 趣味ルーレット（What to do?） =====
+  const suggestions = [
+    "漫画を1巻だけ読む",
+    "Kindleで30分だけ読む",
+    "軽く筋トレ（腕立て・スクワット・プランクなど）を10分やる",
+    "テニスの素振り or フットワークを5分だけやる",
+    "ビリヤードのフォーム研究動画を1本見る",
+    "オンライン麻雀を半荘1回だけ打つ",
+    "ソロでボードゲーム or アプリゲームを1ラウンドだけ遊ぶ",
+    "冷蔵庫の余り物で適当に一品作ってみる",
+    "散歩を15分だけしてみる（家の周りをぐるっと一周でもOK）",
+    "観たいと思っていたアニメ or ドラマを1話だけ見る",
+    "部屋のどこか一カ所だけ片付ける（机の上・本棚の一段など）",
+    "気になることをメモ帳に3つだけ書き出してみる"
+  ];
+
+  const btn = document.getElementById("suggest-btn");
+  const resultBox = document.getElementById("suggest-result");
+
+  if (btn && resultBox) {
+    btn.addEventListener("click", () => {
+      const i = Math.floor(Math.random() * suggestions.length);
+      const text = suggestions[i];
+      resultBox.textContent = text;
+    });
+  }
 </script>
+</body>
+</html>
 </body>
 </html>
