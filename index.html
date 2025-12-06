@@ -348,6 +348,38 @@
       </ul>
     </div>
   </section>
+  <!-- What to do -->
+  <section id="todo">
+    <h2 class="section-title">What to do? <span>/ 今日は何しよう？</span></h2>
+    <div class="section-inner">
+      <p>ボタンを押すと、そのときの気分でできそうな「やること候補」をランダムで1つ出してくれます。</p>
+      <button id="suggest-btn" style="
+        margin-top: 0.7rem;
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid rgba(148,163,184,0.7);
+        background: var(--bg-card, #141827);
+        color: var(--text, #e5e7eb);
+        font-size: 0.9rem;
+        cursor: pointer;
+      ">
+        候補を出す
+      </button>
+
+      <div id="suggest-result" style="
+        margin-top: 0.9rem;
+        padding: 0.7rem 0.8rem;
+        border-radius: 0.8rem;
+        border: 1px dashed rgba(148,163,184,0.5);
+        background: rgba(15,23,42,0.7);
+        min-height: 2.2rem;
+        font-size: 0.92rem;
+        color: var(--text-sub, #9ca3af);
+      ">
+        （ここにおすすめの過ごし方が表示されます）
+      </div>
+    </div>
+  </section>
 
   <!-- Wishlist -->
   <section id="wishlist">
