@@ -1,11 +1,398 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <title>My Private Site</title>
+  <meta charset="UTF-8">
+  <title>ひぐちの趣味部屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-card: #141827;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.18);
+      --text: #e5e7eb;
+      --text-sub: #9ca3af;
+      --border: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1e293b 0, #020617 55%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.95), rgba(15,23,42,0.55));
+      border-bottom: 1px solid rgba(148,163,184,0.18);
+    }
+
+    .nav {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0.8rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-title {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-sub);
+    }
+
+    .nav-links a {
+      margin-left: 0.9rem;
+      font-size: 0.88rem;
+      color: var(--text-sub);
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 2.2rem 1rem 3rem;
+    }
+
+    .hero {
+      padding: 1.8rem 1.6rem;
+      border-radius: 1.4rem;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.15), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(94,234,212,0.13), transparent 55%),
+        var(--bg-card);
+      border: 1px solid rgba(148,163,184,0.3);
+      box-shadow: 0 24px 60px rgba(15,23,42,0.6);
+      margin-bottom: 2.3rem;
+    }
+
+    .hero-title {
+      font-size: clamp(1.7rem, 3vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--accent);
+      margin-bottom: 0.9rem;
+    }
+
+    .hero-body {
+      font-size: 0.95rem;
+      color: var(--text-sub);
+      max-width: 40rem;
+    }
+
+    .hero-tags {
+      margin-top: 1.3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      font-size: 0.75rem;
+      color: var(--text-sub);
+      background: rgba(15,23,42,0.8);
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .section-title span {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .section-inner {
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      background: linear-gradient(to bottom right, rgba(15,23,42,0.96), rgba(15,23,42,0.9));
+      padding: 1.1rem 1.2rem;
+    }
+
+    h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: var(--text-sub);
+      margin-bottom: 0.3rem;
+    }
+
+    ul {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--text-sub);
+    }
+    ul li {
+      margin-bottom: 0.25rem;
+      padding-left: 0.9rem;
+      position: relative;
+    }
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.8rem;
+      top: 0.1rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 1rem;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.4rem;
+    }
+
+    .pill {
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      background: var(--accent-soft);
+      border: 1px solid rgba(56,189,248,0.5);
+      color: #e0f2fe;
+    }
+
+    .log-list li {
+      margin-bottom: 0.35rem;
+    }
+
+    .log-date {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      margin-right: 0.4rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(15,23,42,0.88);
+      padding: 1.4rem 1rem 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.9), #020617);
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .hero {
+        padding: 1.5rem 1.2rem;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, GitHub Pages!</h1>
-  <p>後で中身をちゃんと作り込む予定。</p>
+<header>
+  <div class="nav">
+    <div class="nav-title">Hobby Room</div>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="#hobbies">Hobbies</a>
+      <a href="#now">Now</a>
+      <a href="#wishlist">Wishlist</a>
+      <a href="#log">Log</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <h1 class="hero-title">ひぐちの趣味部屋</h1>
+    <!-- ↑ 好きなタイトルに変えてOK -->
+
+    <div class="hero-sub">のんびりインドア＆ちょっとだけアクティブな雑多趣味</div>
+
+    <div class="hero-body">
+      <p>
+        田舎でゆるく暮らしつつ、テレビ・漫画・ゲーム・ボードゲーム・筋トレ・料理あたりを
+        気分でつまみ食いしている人の、完全自己満足用ページです。
+      </p>
+      <p>
+        「最近何してるの？」と自分に聞かれたときに答えるためのメモ置き場でもあります。
+      </p>
+    </div>
+
+    <div class="hero-tags">
+      <span class="tag">テレビ</span>
+      <span class="tag">漫画</span>
+      <span class="tag">ビリヤード</span>
+      <span class="tag">麻雀</span>
+      <span class="tag">テニス</span>
+      <span class="tag">筋トレ</span>
+      <span class="tag">ボードゲーム</span>
+      <span class="tag">料理</span>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2 class="section-title">About <span>/ このサイトについて</span></h2>
+    <div class="section-inner">
+      <p>
+        このページは、「せっかく休日に時間あるのに、何しよう？」となりがちな自分が、
+        やりたいこと・好きなことを思い出すためのメモ帳です。
+      </p>
+      <p>
+        研究とか仕事の話はほぼ封印して、純粋に「楽しいこと」だけを書く予定。
+        ログをつけたり、やりたいことリストを書いたりしながら、暇な休日をちょっとだけ豊かにしたい。
+      </p>
+    </div>
+  </section>
+
+  <!-- Hobbies -->
+  <section id="hobbies">
+    <h2 class="section-title">Hobbies <span>/ よくやること</span></h2>
+    <div class="section-inner grid-2">
+      <div>
+        <h3>インドア寄り</h3>
+        <ul>
+          <li>テレビ・配信サービスをだらっと見る</li>
+          <li>漫画を一気読みする</li>
+          <li>ボードゲーム（ソロプレイも含む）</li>
+          <li>麻雀（オンライン・オフライン問わず）</li>
+          <li>気分で料理してレシピをいじる</li>
+        </ul>
+        <div class="pill-list">
+          <span class="pill">漫画</span>
+          <span class="pill">ボドゲ</span>
+          <span class="pill">麻雀</span>
+          <span class="pill">料理</span>
+        </div>
+      </div>
+      <div>
+        <h3>ちょっとアクティブ</h3>
+        <ul>
+          <li>筋トレ（家でできる範囲のトレーニング）</li>
+          <li>テニス（できれば定期的に打ちたい）</li>
+          <li>ビリヤードを静かなところでのんびりやる</li>
+          <li>気分が乗ったときだけの散歩・ウォーキング</li>
+        </ul>
+        <div class="pill-list">
+          <span class="pill">筋トレ</span>
+          <span class="pill">テニス</span>
+          <span class="pill">ビリヤード</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Now -->
+  <section id="now">
+    <h2 class="section-title">Now <span>/ 最近ハマっていること</span></h2>
+    <div class="section-inner">
+      <p>
+        ※そのときどきで入れ替えるコーナー。気が向いたら手で書き換える。
+      </p>
+      <ul>
+        <li>● 漫画：今は「ここにタイトルを書く」あたりを読み直し中</li>
+        <li>● ボードゲーム：ソロで回せるゲームを開拓したい</li>
+        <li>● 生活：寝る前はスマホよりKindleを開くようにしたい</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Wishlist -->
+  <section id="wishlist">
+    <h2 class="section-title">Wishlist <span>/ やってみたいこと</span></h2>
+    <div class="section-inner grid-2">
+      <div>
+        <h3>趣味系でやりたいこと</h3>
+        <ul>
+          <li>・ソロプレイ専用のボードゲームを何個か固定メンバーにしたい</li>
+          <li>・簡単なレパートリー料理を3〜5品くらい増やしたい</li>
+          <li>・家でできる筋トレメニューを固定して習慣化したい</li>
+        </ul>
+      </div>
+      <div>
+        <h3>その他の小さな野望</h3>
+        <ul>
+          <li>・年に1回くらい、ちょっといい温泉旅館に泊まりたい</li>
+          <li>・お気に入りのカフェ or 作業スポットを見つけたい</li>
+          <li>・「休日の過ごし方テンプレ」を自分なりに確立したい</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Log -->
+  <section id="log">
+    <h2 class="section-title">Log <span>/ ささやきメモ</span></h2>
+    <div class="section-inner">
+      <p>気分で更新する小さいログ。日記ほど重くなく、一言メモ程度。</p>
+      <ul class="log-list">
+        <li><span class="log-date">2025-12-06</span> GitHub Pages でこの趣味サイトをつくってみた。</li>
+        <li><span class="log-date">2025-xx-xx</span> ここに何か書く。</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div>© <span id="year"></span> ひぐちの趣味部屋</div>
+</footer>
+
+<script>
+  // 年号を自動更新
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
